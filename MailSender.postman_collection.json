@@ -1,0 +1,83 @@
+{
+	"info": {
+		"_postman_id": "16492a5e-12b4-42bf-89ab-84630b17f716",
+		"name": "MailSender",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "26916748",
+		"_collection_link": "https://solar-firefly-356596.postman.co/workspace/Team-Workspace~b9f5115d-5418-4c40-8163-3961829d23c1/collection/26916748-16492a5e-12b4-42bf-89ab-84630b17f716?action=share&source=collection_link&creator=26916748"
+	},
+	"item": [
+		{
+			"name": "Send HTML Email",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"to\": \"destinatario@email.com\",\r\n    \"subject\": \"Test Email HTML\",\r\n    \"title\": \"Bienvenido a nuestro servicio\",\r\n    \"message\": \"Este es un email de prueba con formato HTML\",\r\n    \"footer\": \"Gracias por usar nuestro servicio\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/email/html",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"email",
+						"html"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Send Simple Email",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"to\": \"destinatario@email.com\",\r\n    \"subject\": \"Test Email Simple\",\r\n    \"message\": \"Este es un email de prueba simple\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/email/simple",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"email",
+						"simple"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
