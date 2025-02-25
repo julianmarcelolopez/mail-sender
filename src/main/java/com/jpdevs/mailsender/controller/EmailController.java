@@ -1,5 +1,6 @@
 package com.jpdevs.mailsender.controller;
 
+import com.jpdevs.mailsender.controller.api.EmailApi;
 import lombok.extern.slf4j.Slf4j;
 import com.jpdevs.mailsender.model.EmailRequest;
 import com.jpdevs.mailsender.service.EmailService;
@@ -15,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/api/email")
 @Slf4j
-public class EmailController {
+public class EmailController implements EmailApi {
 	private final EmailService emailService;
 
 	@Autowired

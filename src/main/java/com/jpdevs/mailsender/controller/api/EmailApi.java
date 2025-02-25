@@ -1,4 +1,4 @@
-package com.jpdevs.mailsender.controller;
+package com.jpdevs.mailsender.controller.api;
 
 import com.jpdevs.mailsender.model.EmailRequest;
 import io.swagger.v3.oas.annotations.Operation;
