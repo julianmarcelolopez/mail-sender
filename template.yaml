@@ -15,7 +15,7 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       Handler: com.example.mailsender.LambdaHandler::handleRequest
-      Runtime: java11
+      Runtime: java17
       CodeUri: .
       Events:
         ApiEvents:
