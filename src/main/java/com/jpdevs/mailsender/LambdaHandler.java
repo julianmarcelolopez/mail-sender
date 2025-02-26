@@ -18,9 +18,9 @@ public class LambdaHandler implements RequestHandler<APIGatewayProxyRequestEvent
 
 	static {
 		try {
+			// Inicializa el handler correctamente para aplicaciones servlet
 			handler = SpringBootLambdaContainerHandler.getAwsProxyHandler(MailSenderApplication.class);
 		} catch (ContainerInitializationException e) {
-			// Si no se puede inicializar el contenedor, registrar el error y lanzar una excepción en tiempo de ejecución
 			e.printStackTrace();
 			throw new RuntimeException("No se pudo inicializar la aplicación Spring Boot", e);
 		}
@@ -28,8 +28,8 @@ public class LambdaHandler implements RequestHandler<APIGatewayProxyRequestEvent
 
 	@Override
 	public APIGatewayProxyResponseEvent handleRequest(APIGatewayProxyRequestEvent input, Context context) {
-		// Redireccionar la ruta raíz a Swagger UI
-		if (input.getPath().equals("/") || input.getPath().equals("/dev")) {
+		// Redirige la raíz a Swagger UI
+		if ("/".equals(input.getPath()) || "/dev".equals(input.getPath())) {
 			Map<String, String> headers = new HashMap<>();
 			headers.put("Location", "/swagger-ui/index.html");
 
@@ -38,15 +38,20 @@ public class LambdaHandler implements RequestHandler<APIGatewayProxyRequestEvent
 					.withHeaders(headers);
 		}
 
-		// Para otras rutas, procesar normalmente a través del contenedor Spring Boot
+		// Convierte la solicitud API Gateway en AwsProxyRequest
 		AwsProxyRequest awsProxyRequest = new AwsProxyRequest();
 		awsProxyRequest.setPath(input.getPath());
 		awsProxyRequest.setHttpMethod(input.getHttpMethod());
 		awsProxyRequest.setBody(input.getBody());
-		awsProxyRequest.setHeaders((SingleValueHeaders) input.getHeaders());
+		SingleValueHeaders singleValueHeaders = new SingleValueHeaders();
+		if (input.getHeaders() != null) {
+			input.getHeaders().forEach(singleValueHeaders::put);
+		}
+		awsProxyRequest.setHeaders(singleValueHeaders);
 		awsProxyRequest.setQueryStringParameters(input.getQueryStringParameters());
 		awsProxyRequest.setPathParameters(input.getPathParameters());
 
+		// Procesa la solicitud con Spring Boot
 		AwsProxyResponse response = handler.proxy(awsProxyRequest, context);
 
 		return new APIGatewayProxyResponseEvent()
