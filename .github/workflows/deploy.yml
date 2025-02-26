@@ -19,6 +19,11 @@ jobs:
       - name: Build with Maven
         run: mvn clean package -B
 
+      - name: List files for debugging
+        run: |
+          ls -la
+          ls -la target/
+
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v2
         with:
@@ -26,7 +31,14 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: us-east-1
 
-      - name: Deploy to AWS Lambda
-        run: |
-          aws sam build
-          aws sam deploy --stack-name mail-sender --no-confirm-changeset --no-fail-on-empty-changeset
+      - name: Setup SAM CLI
+        uses: aws-actions/setup-sam@v2
+
+      - name: SAM Validate
+        run: sam validate
+
+      - name: SAM Build
+        run: sam build --debug
+
+      - name: SAM Deploy
+        run: sam deploy --stack-name mail-sender --no-confirm-changeset --no-fail-on-empty-changeset --capabilities CAPABILITY_IAM

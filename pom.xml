@@ -9,10 +9,10 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.jpdevs</groupId>
-    <artifactId>MailSender</artifactId>
+    <artifactId>mail-sender</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>MailSender</name>
-    <description>MailSender</description>
+    <name>mail-sender</name>
+    <description>mail-sender</description>
     <url/>
     <licenses>
         <license/>
@@ -77,6 +77,11 @@
             <groupId>com.amazonaws</groupId>
             <artifactId>aws-lambda-java-events</artifactId>
             <version>3.11.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.amazonaws.serverless</groupId>
+            <artifactId>aws-serverless-java-container-springboot2</artifactId>
+            <version>1.9.1</version>
         </dependency>
     </dependencies>
 
