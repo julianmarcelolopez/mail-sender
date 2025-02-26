@@ -16,7 +16,7 @@ Resources:
     Properties:
       Handler: com.jpdevs.mailsender.LambdaHandler::handleRequest
       Runtime: java17
-      CodeUri: target/mail-sender-0.0.1-SNAPSHOT.jar  # Ajusta esto al nombre exacto de tu JAR
+      CodeUri: ./
       Events:
         ApiEvents:
           Type: Api
