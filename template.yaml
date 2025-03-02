@@ -37,6 +37,14 @@ Resources:
         AllowMethods: "'*'"
         AllowHeaders: "'*'"
         AllowOrigin: "'*'"
+      BinaryMediaTypes:
+        - 'application/javascript'
+        - 'text/css'
+        - 'text/html'
+        - 'image/png'
+        - 'image/jpeg'
+        - 'image/gif'
+        - '*/*'
 
 Outputs:
   ApiURL:
