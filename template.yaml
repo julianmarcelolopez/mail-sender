@@ -46,6 +46,7 @@ Resources:
           - 'image/png'
           - 'image/jpeg'
           - 'image/gif'
+          - 'application/json'
 
 Outputs:
   ApiURL:
